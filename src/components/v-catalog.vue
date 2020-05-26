@@ -3,7 +3,7 @@
     <h1>Catalog</h1>
     <div class="v-catalog__list">
       <v-catalog-item
-      v-for="product in products"
+      v-for="product in PRODUCTS"
       :key="product.article"
       :product_data="product"
       @sendArticle="showChildArticleInConsole"
@@ -13,64 +13,27 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
 import vCatalogItem from './v-catalog-item.vue';
 
 export default {
   name: 'v-catalog',
   data() {
-    return {
-      products: [
-        {
-          image: '1.jpg',
-          name: 'T-shirt 1',
-          price: 2100.234234234,
-          article: 'T1',
-          available: true,
-        },
-        {
-          image: '2.jpg',
-          name: 'T-shirt 2',
-          price: 3150.12312412,
-          article: 'T2',
-          available: true,
-        },
-        {
-          image: '3.jpg',
-          name: 'T-shirt 3',
-          price: 4200.51524,
-          article: 'T3',
-          available: false,
-        },
-        {
-          image: '4.jpg',
-          name: 'T-shirt 4',
-          price: 5300.1245512,
-          article: 'T4',
-          available: true,
-        },
-        {
-          image: '5.jpg',
-          name: 'T-shirt 5',
-          price: 6500.3522314,
-          article: 'T5',
-          available: false,
-        },
-        {
-          image: '6.jpeg',
-          name: 'T-shirt 6',
-          price: 8700.4124123,
-          article: 'T6',
-          available: true,
-        },
-      ],
-    };
+    return {};
   },
   props: {},
   components: { vCatalogItem },
   methods: {
+    ...mapActions(['GET_PRODUCTS_FROM_API']),
     showChildArticleInConsole(data) {
       console.log(data);
     },
+  },
+  mounted() {
+    this.GET_PRODUCTS_FROM_API();
+  },
+  computed: {
+    ...mapGetters(['PRODUCTS']),
   },
 };
 </script>
