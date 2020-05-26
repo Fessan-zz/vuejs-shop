@@ -13,6 +13,27 @@ export default new Vuex.Store({
     SET_PRODUCTS_TO_STATE: (state, products) => {
       state.products = products;
     },
+    SET_CART: (state, product) => {
+      if (state.cart.length) {
+        let isProductExt = false;
+        // eslint-disable-next-line array-callback-return
+        state.cart.map((item) => {
+          if (item.article === product.article) {
+            isProductExt = true;
+            // eslint-disable-next-line no-param-reassign
+            item.quantity += 1;
+          }
+          if (!isProductExt) {
+            state.cart.push(product);
+          }
+        });
+      } else {
+        state.cart.push(product);
+      }
+    },
+    REMOVE_FROM_CART: (state, index) => {
+      state.cart.splice(index, 1);
+    },
   },
   actions: {
     GET_PRODUCTS_FROM_API({ commit }) {
@@ -25,6 +46,12 @@ export default new Vuex.Store({
         console.log(err);
         return err;
       });
+    },
+    ADD_TO_CART({ commit }, product) {
+      commit('SET_CART', product);
+    },
+    DELETE_FROM_CART({ commit }, index) {
+      commit('REMOVE_FROM_CART', index);
     },
   },
   getters: {
