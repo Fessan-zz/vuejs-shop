@@ -14,19 +14,19 @@ export default new Vuex.Store({
       state.products = products;
     },
     SET_CART: (state, product) => {
+      let isProductExists = false;
       if (state.cart.length) {
-        let isProductExt = false;
         // eslint-disable-next-line array-callback-return
         state.cart.map((item) => {
           if (item.article === product.article) {
-            isProductExt = true;
+            isProductExists = true;
             // eslint-disable-next-line no-param-reassign
             item.quantity += 1;
           }
-          if (!isProductExt) {
-            state.cart.push(product);
-          }
         });
+        if (!isProductExists) {
+          state.cart.push(product);
+        }
       } else {
         state.cart.push(product);
       }

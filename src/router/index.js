@@ -1,9 +1,25 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
+
+import vCatalog from '@/components/v-catalog.vue';
+import vCart from '../components/v-cart.vue';
+
 Vue.use(VueRouter);
 
-const routes = [];
+const routes = [
+  {
+    path: '/',
+    name: 'catalog',
+    component: vCatalog,
+  },
+  {
+    path: '/cart',
+    name: 'cart',
+    component: vCart,
+    props: true,
+  },
+];
 
 const router = new VueRouter({
   mode: 'history',
