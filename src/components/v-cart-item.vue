@@ -25,9 +25,6 @@ export default {
       default: () => {},
     },
   },
-  mounted() {
-    this.$set(this.cart_item_data, 'quantity', 1);
-  },
   methods: {
     deleteFromCart() {
       this.$emit('deleteFromCart');
