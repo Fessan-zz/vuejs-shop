@@ -1,18 +1,14 @@
 <template>
   <div class="v-main-wrapper">
-    <p>{{title}}</p>
-    <v-catalog />
-    <v-cart />
+    <keep-alive>
+      <router-view />
+    </keep-alive>
   </div>
 </template>
 
 <script>
-import vCart from './v-cart.vue';
-import vCatalog from './v-catalog.vue';
-
 export default {
   name: 'v-main-wrapper',
-  components: { vCatalog, vCart },
   props: {},
   data() {
     return {
@@ -23,7 +19,6 @@ export default {
   methods: {},
   watch: {},
   mounted() {
-    console.log('hello!');
   },
 };
 </script>

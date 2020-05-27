@@ -5,9 +5,14 @@
     <p class="v-catalog-item__name">{{product_data.name}}</p>
     <p class="v-catalog-item__price">Price: {{product_data.price}} Р.</p>
     <button class="v-catalog-item__add_to_cart_btn btn"
+<<<<<<< HEAD
     @click="sendDataToParent"
     >add to Cart
     </button>
+=======
+    @click="addToCart"
+    >add to Cart</button>
+>>>>>>> 568611bce33a87947e133d2fd223dd839d293653
   </div>
 </template>
 
@@ -17,6 +22,9 @@ export default {
   data() {
     return {};
   },
+  mounted() {
+    this.$set(this.product_data, 'quantity', 1);
+  },
   props: {
     product_data: {
       type: Object,
@@ -24,8 +32,8 @@ export default {
     },
   },
   methods: {
-    sendDataToParent() {
-      this.$emit('sendArticle', this.product_data.article);
+    addToCart() {
+      this.$emit('addToCart', this.product_data);
     },
   },
 };
