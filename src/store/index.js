@@ -13,6 +13,14 @@ export default new Vuex.Store({
     SET_PRODUCTS_TO_STATE: (state, products) => {
       state.products = products;
     },
+    INCREMENT: (state, index) => {
+      state.cart[index].quantity += 1;
+    },
+    DECREMENT: (state, index) => {
+      if (state.cart[index].quantity > 1) {
+        state.cart[index].quantity -= 1;
+      }
+    },
     SET_CART: (state, product) => {
       let isProductExists = false;
       if (state.cart.length) {
@@ -52,6 +60,12 @@ export default new Vuex.Store({
     },
     DELETE_FROM_CART({ commit }, index) {
       commit('REMOVE_FROM_CART', index);
+    },
+    INCREMENT_CART_ITEM({ commit }, index) {
+      commit('INCREMENT', index);
+    },
+    DECREMENT_CART_ITEM({ commit }, index) {
+      commit('DECREMENT', index);
     },
   },
   getters: {

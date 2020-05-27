@@ -10,7 +10,13 @@
       :key="item.article"
       :cart_item_data="item"
       @deleteFromCart="deleteFromCart(index)"
+      @increment="increment(index)"
+      @decrement="decrement(index)"
      />
+     <div class="v-cart__total">
+       <p class="total__name" >Total:</p>
+       <p>{{cartTotalCost}} P.</p>
+     </div>
   </div>
 </template>
 
@@ -31,9 +37,32 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['DELETE_FROM_CART']),
+    ...mapActions([
+      'DELETE_FROM_CART',
+      'INCREMENT_CART_ITEM',
+      'DECREMENT_CART_ITEM']),
     deleteFromCart(index) {
       this.DELETE_FROM_CART(index);
+    },
+    increment(index) {
+      this.INCREMENT_CART_ITEM(index);
+    },
+    decrement(index) {
+      this.DECREMENT_CART_ITEM(index);
+    },
+  },
+  computed: {
+    cartTotalCost() {
+      let result = [];
+      if (this.cart_data.length) {
+        // eslint-disable-next-line no-restricted-syntax
+        for (const item of this.cart_data) {
+          result.push(item.price * item.quantity);
+        }
+        result = result.reduce((sum, elem) => sum + elem);
+        return result;
+      }
+      return 0;
     },
   },
 };
