@@ -6,7 +6,8 @@
     <p class="v-catalog-item__price">Price: {{product_data.price}} Р.</p>
     <button class="v-catalog-item__add_to_cart_btn btn"
     @click="sendDataToParent"
-    >add to Cart</button>
+    >add to Cart
+    </button>
   </div>
 </template>
 
