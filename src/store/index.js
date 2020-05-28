@@ -1,79 +1,15 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import axios from 'axios';
+import actions from './actions/actions';
+import getters from './getters/getters';
+import mutations from './mutations/mutations';
+import state from './state/state';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {
-    products: [],
-    cart: [],
-  },
-  mutations: {
-    SET_PRODUCTS_TO_STATE: (state, products) => {
-      state.products = products;
-    },
-    INCREMENT: (state, index) => {
-      state.cart[index].quantity += 1;
-    },
-    DECREMENT: (state, index) => {
-      if (state.cart[index].quantity > 1) {
-        state.cart[index].quantity -= 1;
-      }
-    },
-    SET_CART: (state, product) => {
-      let isProductExists = false;
-      if (state.cart.length) {
-        // eslint-disable-next-line array-callback-return
-        state.cart.map((item) => {
-          if (item.article === product.article) {
-            isProductExists = true;
-            // eslint-disable-next-line no-param-reassign
-            item.quantity += 1;
-          }
-        });
-        if (!isProductExists) {
-          state.cart.push(product);
-        }
-      } else {
-        state.cart.push(product);
-      }
-    },
-    REMOVE_FROM_CART: (state, index) => {
-      state.cart.splice(index, 1);
-    },
-  },
-  actions: {
-    GET_PRODUCTS_FROM_API({ commit }) {
-      return axios('http://localhost:3000/products', {
-        method: 'GET',
-      }).then((products) => {
-        commit('SET_PRODUCTS_TO_STATE', products.data);
-        return products;
-      }).catch((err) => {
-        console.log(err);
-        return err;
-      });
-    },
-    ADD_TO_CART({ commit }, product) {
-      commit('SET_CART', product);
-    },
-    DELETE_FROM_CART({ commit }, index) {
-      commit('REMOVE_FROM_CART', index);
-    },
-    INCREMENT_CART_ITEM({ commit }, index) {
-      commit('INCREMENT', index);
-    },
-    DECREMENT_CART_ITEM({ commit }, index) {
-      commit('DECREMENT', index);
-    },
-  },
-  getters: {
-    PRODUCTS(state) {
-      return state.products;
-    },
-    CART(state) {
-      return state.cart;
-    },
-  },
+  state,
+  mutations,
+  actions,
+  getters,
 });
