@@ -11,7 +11,7 @@
     />
     <div class="v-catalog__list">
       <v-catalog-item
-      v-for="product in PRODUCTS"
+      v-for="product in filteredProducts"
       :key="product.article"
       :product_data="product"
       @addToCart="addToCart"
@@ -30,7 +30,7 @@ export default {
   data() {
     return {
       categories: [
-        { name: 'Все', value: 'ALL' },
+        { name: 'Все', value: 'All' },
         { name: 'Мужские', value: 'м' },
         { name: 'Женские', value: 'ж' },
       ],
@@ -46,13 +46,14 @@ export default {
       this.ADD_TO_CART(data);
     },
     sortByCategories(category) {
+      this.sortedProducts = [];
+      // eslint-disable-next-line array-callback-return
       this.PRODUCTS.map((item) => {
-        this.sortedProducts = [];
         if (item.category === category.name) {
           this.sortedProducts.push(item);
         }
-        return [];
       });
+      this.selected = category.name;
     },
   },
   mounted() {
