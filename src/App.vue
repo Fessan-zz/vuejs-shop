@@ -5,11 +5,30 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
 import vMainWrapper from './components/v-main-wrapper.vue';
 
 export default {
   name: 'app',
   components: { vMainWrapper },
+  methods: {
+    ...mapActions(['SET_MOBILE', 'SET_DESKTOP']),
+  },
+  computed: {
+    ...mapGetters(['IS_MOBILE', 'IS_DESKTOP']),
+  },
+  mounted() {
+    const vm = this;
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 767) {
+        vm.SET_DESKTOP();
+        console.log('desktop', vm.IS_DESKTOP);
+      } else {
+        vm.SET_MOBILE();
+        console.log('mobile', vm.IS_MOBILE);
+      }
+    });
+  },
 };
 </script>
 

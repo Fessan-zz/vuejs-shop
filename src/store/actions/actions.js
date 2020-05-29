@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 export default {
-
   GET_PRODUCTS_FROM_API({ commit }) {
     return axios('http://localhost:3000/products', {
       method: 'GET',
@@ -24,5 +23,11 @@ export default {
   },
   DECREMENT_CART_ITEM({ commit }, index) {
     commit('DECREMENT', index);
+  },
+  SET_MOBILE({ commit }) {
+    commit('SWITCH_MOBILE');
+  },
+  SET_DESKTOP({ commit }) {
+    commit('SWITCH_DESKTOP');
   },
 };

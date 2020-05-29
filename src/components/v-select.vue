@@ -5,7 +5,7 @@
       @click="areOptionsVisible = !areOptionsVisible"
     >{{selected}}</p>
     <div class="options"
-      v-if="areOptionsVisible"
+      v-if="areOptionsVisible || isExpended"
     >
       <p
         v-for="option in options"
@@ -29,6 +29,10 @@ export default {
     selected: {
       type: String,
       default: () => '',
+    },
+    isExpended: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
