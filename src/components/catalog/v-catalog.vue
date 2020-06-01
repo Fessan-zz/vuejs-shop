@@ -14,16 +14,16 @@
       <input
         type="range"
         min="0"
-        max="1000"
-        step="10"
+        max="10000"
+        step="100"
         v-model.number="minPrice"
         @change="setRangeSliders"
         >
       <input
         type="range"
         min="0"
-        max="1000"
-        step="10"
+        max="10000"
+        step="100"
         v-model.number="maxPrice"
         @change="setRangeSliders"
         >
@@ -61,7 +61,7 @@ export default {
       selected: 'Все',
       sortedProducts: [],
       minPrice: 0,
-      maxPrice: 1000,
+      maxPrice: 10000,
     };
   },
   props: {},

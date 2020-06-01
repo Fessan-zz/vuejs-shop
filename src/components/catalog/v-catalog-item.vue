@@ -13,7 +13,7 @@
     :src="require(`../../assets/img/${product_data.image}`)" alt="img">
     <div>
       <p class="v-catalog-item__name">{{product_data.name}}</p>
-      <p class="v-catalog-item__price">Price: {{product_data.price}} Р.</p>
+      <p class="v-catalog-item__price">Price: {{product_data.price | toFix | formatedPrice}} Р.</p>
       <p class="v-catalog-item__price">Category: {{product_data.category}}</p>
     </div>
     </v-popup>
@@ -21,7 +21,7 @@
     <img class="v-catalog-item__image"
     :src="require(`../../assets/img/${product_data.image}`)" alt="img">
     <p class="v-catalog-item__name">{{product_data.name}}</p>
-    <p class="v-catalog-item__price">Price: {{product_data.price}} Р.</p>
+    <p class="v-catalog-item__price">Price: {{product_data.price | toFix | formatedPrice}}</p>
     <button
       class="v-catalog-item__show_info"
       @click="showPopupInfo"
@@ -37,6 +37,8 @@
 
 <script>
 import vPopup from '../popup/v-popup.vue';
+import toFix from '../../filters/toFix';
+import formatedPrice from '../../filters/price-format';
 
 export default {
   name: 'v-catalog-item',
@@ -54,6 +56,10 @@ export default {
       type: Object,
       default: () => {},
     },
+  },
+  filters: {
+    toFix,
+    formatedPrice,
   },
   methods: {
     addToCart() {
