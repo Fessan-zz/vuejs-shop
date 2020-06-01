@@ -91,17 +91,31 @@ export default {
         });
       }
     },
+    sortProductsBySearchValue(value) {
+      this.sortedProducts = [...this.PRODUCTS];
+      if (value) {
+        this.sortedProducts = this.sortedProducts.filter((item) => item.name.toLowerCase()
+          .includes(value.toLowerCase()));
+      } else {
+        this.sortedProducts = this.PRODUCTS;
+      }
+    },
+  },
+  watch: {
+    SEARCH_VALUE() {
+      this.sortProductsBySearchValue(this.SEARCH_VALUE);
+    },
   },
   mounted() {
     this.GET_PRODUCTS_FROM_API().then((response) => {
       if (response.data) {
-        console.log('this data');
         this.sortByCategories();
+        this.sortProductsBySearchValue(this.SEARCH_VALUE);
       }
     });
   },
   computed: {
-    ...mapGetters(['PRODUCTS', 'CART', 'IS_MOBILE', 'IS_DESKTOP']),
+    ...mapGetters(['PRODUCTS', 'CART', 'IS_MOBILE', 'IS_DESKTOP', 'SEARCH_VALUE']),
     filteredProducts() {
       if (this.sortedProducts.length) {
         return this.sortedProducts;
@@ -122,8 +136,8 @@ export default {
   }
   &__link_to_cart {
     position: fixed;
-    top: 80px;
-    right: 10px;
+    top: 100px;
+    right: 100px;
     padding: $padding*2;
     border: solid 1px #aeaeae;
     background: #ffffff;

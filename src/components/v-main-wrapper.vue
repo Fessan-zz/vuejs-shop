@@ -1,5 +1,6 @@
 <template>
   <div class="v-main-wrapper">
+    <v-header />
     <keep-alive>
       <router-view />
     </keep-alive>
@@ -7,6 +8,8 @@
 </template>
 
 <script>
+import vHeader from './layouts/v-header.vue';
+
 export default {
   name: 'v-main-wrapper',
   props: {},
@@ -18,6 +21,7 @@ export default {
   computed: {},
   methods: {},
   watch: {},
+  components: { vHeader },
   mounted() {
   },
 };
@@ -25,7 +29,6 @@ export default {
 
 <style lang="scss">
 .v-main-wrapper {
-  max-width: 900px;
   margin: 0 auto;
 }
 </style>>

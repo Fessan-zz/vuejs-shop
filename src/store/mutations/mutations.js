@@ -40,4 +40,7 @@ export default {
     state.isDesktop = true;
     state.isMobile = false;
   },
+  GET_SEARCH_VALUE_TO_VUEX: (state, value) => {
+    state.searchValue = value;
+  },
 };
