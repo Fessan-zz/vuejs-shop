@@ -23,7 +23,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .v-main-wrapper {
   max-width: 900px;
   margin: 0 auto;
