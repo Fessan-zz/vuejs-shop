@@ -1,5 +1,11 @@
 <template>
   <div class="v-catalog">
+
+    <v-notification
+      :messages="messages"
+      :timeout="6000"
+    />
+
     <router-link :to="{name: 'cart', params: {cart_data: CART}}">
       <div class="v-catalog__link_to_cart">Cart: {{CART.length}}</div>
     </router-link>
@@ -48,6 +54,7 @@
 import { mapActions, mapGetters } from 'vuex';
 import vCatalogItem from './v-catalog-item.vue';
 import vSelect from '../v-select.vue';
+import vNotification from '../notifications/v-notivication.vue';
 
 export default {
   name: 'v-catalog',
@@ -62,10 +69,11 @@ export default {
       sortedProducts: [],
       minPrice: 0,
       maxPrice: 10000,
+      messages: [],
     };
   },
   props: {},
-  components: { vCatalogItem, vSelect },
+  components: { vCatalogItem, vSelect, vNotification },
   methods: {
     setRangeSliders() {
       if (this.minPrice > this.maxPrice) {
@@ -77,7 +85,12 @@ export default {
     },
     ...mapActions(['GET_PRODUCTS_FROM_API', 'ADD_TO_CART']),
     addToCart(data) {
-      this.ADD_TO_CART(data);
+      this.ADD_TO_CART(data).then(() => {
+        const time = Date.now().toLocaleString();
+        this.messages.unshift(
+          { name: 'Товар добавлен в корзину', icon: 'check_circle', id: time },
+        );
+      });
     },
     sortByCategories(category) {
       this.sortedProducts = [...this.PRODUCTS];
