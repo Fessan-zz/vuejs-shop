@@ -19,6 +19,7 @@
     </v-popup>
 
     <img class="v-catalog-item__image"
+    @click="productClick"
     :src="require(`../../assets/img/${product_data.image}`)" alt="img">
     <p class="v-catalog-item__name">{{product_data.name}}</p>
     <p class="v-catalog-item__price">Price: {{product_data.price | toFix | formatedPrice}}</p>
@@ -70,6 +71,9 @@ export default {
     },
     closeInfoPopup() {
       this.isInfoPopupVisible = false;
+    },
+    productClick() {
+      this.$emit('productClick', this.product_data.article);
     },
   },
 };

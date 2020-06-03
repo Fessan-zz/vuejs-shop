@@ -41,10 +41,11 @@
     </div>
     <div class="v-catalog__list">
       <v-catalog-item
-      v-for="product in filteredProducts"
-      :key="product.article"
-      :product_data="product"
-      @addToCart="addToCart"
+        v-for="product in filteredProducts"
+        :key="product.article"
+        :product_data="product"
+        @addToCart="addToCart"
+        @productClick="productClick"
       />
     </div>
   </div>
@@ -75,6 +76,9 @@ export default {
   props: {},
   components: { vCatalogItem, vSelect, vNotification },
   methods: {
+    productClick(article) {
+      this.$router.push({ name: 'product', query: { product: article } });
+    },
     setRangeSliders() {
       if (this.minPrice > this.maxPrice) {
         const tmp = this.maxPrice;
